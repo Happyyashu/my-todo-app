@@ -3,6 +3,9 @@ import functions
 
 
 todos = functions.get_todos()
+
+st.set_page_config(layout='wide')
+
 def add_todo():
     todo = st.session_state['new_todo'] + '\n'
     todos.append(todo)
@@ -10,8 +13,11 @@ def add_todo():
 
 
 st.title('My Todo App')
-st.subheader('This app is to increase productivity')
-st.write('Please check the item in below list to complete that task')
+st.write('This app is to increase <b>productivity</b>',
+            unsafe_allow_html = True)
+st.write('<b>Please check the item</b> in below list to complete that task',unsafe_allow_html=True)
+st.text_input(label="Enter todo:",placeholder='Add new todo...',
+              on_change=add_todo, key = 'new_todo')
 
 
 for index,todo in enumerate(todos):
@@ -22,8 +28,7 @@ for index,todo in enumerate(todos):
         del st.session_state[todo]
         st.experimental_rerun()
 
-st.text_input(label="Enter todo:",placeholder='Add new todo...',
-              on_change=add_todo, key = 'new_todo')
+
 
 
 # st.session_state
